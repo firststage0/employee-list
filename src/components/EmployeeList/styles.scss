@@ -1,0 +1,10 @@
+.table-row {
+    cursor: pointer;
+    transition: 250ms;
+    background-color: transparent;
+
+    &:hover{
+        background-color: lightgray;
+    }
+}
+    
