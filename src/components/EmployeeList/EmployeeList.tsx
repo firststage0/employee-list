@@ -85,11 +85,17 @@ export const EmployeeList = () => {
                                 <TableCell>{employee.post}</TableCell>
                             </TableRow>
                         ))}
-                        {emptyRows > 0 && (
-                            <TableRow>
-                                <TableCell colSpan={4} />
-                            </TableRow>
-                        )}
+                        {emptyRows > 0 &&
+                            Array.from({ length: emptyRows }).map(
+                                (_, index) => (
+                                    <TableRow
+                                        key={`empty-${index}`}
+                                        style={{ height: 53 }}
+                                    >
+                                        <TableCell colSpan={4} />
+                                    </TableRow>
+                                )
+                            )}
                     </TableBody>
                 </Table>
             </TableContainer>
