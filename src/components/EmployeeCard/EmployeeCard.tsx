@@ -2,17 +2,27 @@ import { useEmployeeStore } from "@/hooks/useEmployeeStore";
 import { Card, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router";
 import imageNotAvailable from "/image-not-available.jpg";
-
+import { useState, useEffect } from "react";
 import "./styles.scss";
+import { IEmployee } from "@/types/types";
 
 interface IEmployeeCardProps {
     id: number;
 }
 
 export const EmployeeCard = ({ id }: IEmployeeCardProps) => {
-    const employee = useEmployeeStore((state) =>
-        state.employees.data.find((el) => el.id === id)
-    );
+    const { isLoading, fetchEmployeeById } = useEmployeeStore();
+    const [employee, setEmployee] = useState<IEmployee>();
+
+    useEffect(() => {
+        fetchEmployeeById(id).then((employee) => {
+            setEmployee(employee);
+        });
+    }, [fetchEmployeeById, id]);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     if (!employee) {
         return <h1>Увы, сотрудник не найден</h1>;

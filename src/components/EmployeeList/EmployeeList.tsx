@@ -8,6 +8,7 @@ import {
     TablePagination,
     TableRow,
     TextField,
+    CircularProgress,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -27,7 +28,7 @@ export const EmployeeList = () => {
     );
 
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employees.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employees.total) : 0;
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -52,7 +53,7 @@ export const EmployeeList = () => {
     }, [fetchEmployees, page, rowsPerPage]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <CircularProgress />;
     }
 
     return (
@@ -102,7 +103,7 @@ export const EmployeeList = () => {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={employees.length}
+                count={employees.total}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

@@ -2,7 +2,7 @@ import { IEmployee } from "@/types/types";
 import { create } from "zustand";
 
 interface IEmployeeStore {
-    employees: { data: IEmployee[]; length: number };
+    employees: { data: IEmployee[]; total: number };
     isLoading: boolean;
     fetchEmployees: (page?: number, limit?: number) => void;
     fetchEmployeeById: (id: number) => Promise<IEmployee | undefined>;
@@ -22,8 +22,19 @@ export const useEmployeeStore = create<IEmployeeStore>((set) => ({
                 salary: 65000,
                 photo: "",
             },
+            {
+                id: 2,
+                firstName: "Анна",
+                lastName: "Петрова",
+                middleName: "Сергеевна",
+                birthDate: "1985-03-27T10:22:15.582Z",
+                department: "Отдел кадров",
+                post: "Менеджер",
+                salary: 75000,
+                photo: "",
+            },
         ],
-        length: 1,
+        total: 2,
     },
     isLoading: false,
     fetchEmployees: async (page = 1, limit = 5) => {
@@ -46,7 +57,7 @@ export const useEmployeeStore = create<IEmployeeStore>((set) => ({
         try {
             set({ isLoading: true });
             const employeeResponse = await fetch(
-                `http://localhost:8080/employees/${id}`
+                `http://localhost:8080/employee/${id}`
             );
             if (employeeResponse.ok) {
                 const employee = await employeeResponse.json();
