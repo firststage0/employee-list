@@ -10,30 +10,7 @@ interface IEmployeeStore {
 
 export const useEmployeeStore = create<IEmployeeStore>((set) => ({
     employees: {
-        data: [
-            {
-                id: 1,
-                firstName: "Иван",
-                lastName: "Иванов",
-                middleName: "Иванович",
-                birthDate: "1992-11-13T08:41:04.172Z",
-                department: "Бухгалтерия",
-                post: "Бухгалтер",
-                salary: 65000,
-                photo: "",
-            },
-            {
-                id: 2,
-                firstName: "Анна",
-                lastName: "Петрова",
-                middleName: "Сергеевна",
-                birthDate: "1985-03-27T10:22:15.582Z",
-                department: "Отдел кадров",
-                post: "Менеджер",
-                salary: 75000,
-                photo: "",
-            },
-        ],
+        data: [],
         total: 2,
     },
     isLoading: false,

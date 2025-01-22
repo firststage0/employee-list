@@ -1,5 +1,5 @@
 import { useEmployeeStore } from "@/hooks/useEmployeeStore";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, CircularProgress } from "@mui/material";
 import { Link } from "react-router";
 import imageNotAvailable from "/image-not-available.jpg";
 import { useState, useEffect } from "react";
@@ -17,7 +17,7 @@ export const EmployeeCard = ({ id }: IEmployeeCardProps) => {
     const renderEmployeeCard = () => {
         switch (true) {
             case isLoading:
-                return <div>Loading...</div>;
+                return <CircularProgress />;
             case !employee:
                 return <h1>Увы, сотрудник не найден</h1>;
             default: {

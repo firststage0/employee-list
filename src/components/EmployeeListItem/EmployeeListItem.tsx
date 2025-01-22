@@ -11,7 +11,7 @@ export const EmployeeListItem = ({
     const { id, firstName, lastName, middleName, department, post } = employee;
     return (
         <TableRow onClick={() => onClick(id)} className={styles.tableRow}>
-            <TableCell>{id + 1}</TableCell>
+            <TableCell>{id}</TableCell>
             <TableCell>{`${lastName} ${firstName} ${middleName}`}</TableCell>
             <TableCell>{department}</TableCell>
             <TableCell>{post}</TableCell>
