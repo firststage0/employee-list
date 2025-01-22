@@ -34,10 +34,12 @@ export const useEmployeeStore = create<IEmployeeStore>((set) => ({
             );
             if (employeeResponse.ok) {
                 const employeesData = await employeeResponse.json();
-                set({ employees: employeesData, isLoading: false });
+                set({ employees: employeesData });
             }
         } catch (error) {
-            console.log(error);
+            console.log("Error: ", error);
+        } finally {
+            set({ isLoading: false });
         }
     },
     fetchEmployeeById: async (id) => {
@@ -48,12 +50,13 @@ export const useEmployeeStore = create<IEmployeeStore>((set) => ({
             );
             if (employeeResponse.ok) {
                 const employee = await employeeResponse.json();
-                set({ isLoading: false });
+
                 return employee;
             }
         } catch (error) {
+            console.log("Error: ", error);
+        } finally {
             set({ isLoading: false });
-            console.log(error);
         }
     },
 }));
