@@ -43,10 +43,9 @@ export const useEmployeeStore = create<IEmployeeStore>((set) => ({
             const employeeResponse = await fetch(
                 `http://localhost:8080/employees?page=${page}&limit=${limit}`
             );
-            if (employeeResponse.ok) {
-                const employeesData = await employeeResponse.json();
-                set({ employees: employeesData });
-            }
+
+            const employeesData = await employeeResponse.json();
+            set({ employees: employeesData });
         } catch (error) {
             console.log("Error: ", error);
         } finally {
@@ -59,11 +58,8 @@ export const useEmployeeStore = create<IEmployeeStore>((set) => ({
             const employeeResponse = await fetch(
                 `http://localhost:8080/employee/${id}`
             );
-            if (employeeResponse.ok) {
-                const employee = await employeeResponse.json();
-
-                return employee;
-            }
+            const employee = await employeeResponse.json();
+            return employee;
         } catch (error) {
             console.log("Error: ", error);
         } finally {

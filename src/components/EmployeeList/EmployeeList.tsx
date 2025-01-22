@@ -12,8 +12,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import "./styles.scss";
-
+import { EmployeeListItem } from "@/components/EmployeeListItem/EmployeeListItem";
 export const EmployeeList = () => {
     const { employees, fetchEmployees, isLoading } = useEmployeeStore();
     const [search, setSearch] = useState<string>("");
@@ -27,8 +26,9 @@ export const EmployeeList = () => {
             .includes(search.toLocaleLowerCase())
     );
 
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employees.total) : 0;
+    const emptyRows = page
+        ? Math.max(0, (1 + page) * rowsPerPage - employees.total)
+        : 0;
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -73,20 +73,13 @@ export const EmployeeList = () => {
                     </TableHead>
                     <TableBody>
                         {filteredEmployeeList.map((employee, index) => (
-                            <TableRow
-                                key={employee.id}
-                                onClick={() => {
-                                    handleNavigateTo(employee.id);
-                                }}
-                                className="table-row"
-                            >
-                                <TableCell>{index + 1}</TableCell>
-                                <TableCell>{`${employee.lastName} ${employee.firstName} ${employee.middleName}`}</TableCell>
-                                <TableCell>{employee.department}</TableCell>
-                                <TableCell>{employee.post}</TableCell>
-                            </TableRow>
+                            <EmployeeListItem
+                                onClick={handleNavigateTo}
+                                key={index}
+                                employee={employee}
+                            />
                         ))}
-                        {emptyRows > 0 &&
+                        {!!emptyRows &&
                             Array.from({ length: emptyRows }).map(
                                 (_, index) => (
                                     <TableRow
