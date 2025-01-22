@@ -40,7 +40,7 @@ export const EmployeeCard = ({ id }: IEmployeeCardProps) => {
 
                 return (
                     <div className={styles.employeeCard_wrapper}>
-                        <Link to="/home" className={styles.homeLink}>
+                        <Link to="/" className={styles.homeLink}>
                             <img
                                 src="/icon-back.png"
                                 alt=""
