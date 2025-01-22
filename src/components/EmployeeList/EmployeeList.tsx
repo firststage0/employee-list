@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useEmployeeStore } from "@/hooks/useEmployeeStore";
 import {
     Table,
     TableBody,
     TableCell,
+    TableContainer,
     TableHead,
+    TablePagination,
     TableRow,
     TextField,
-    TablePagination,
-    TableContainer,
 } from "@mui/material";
-import { useEmployeeStore } from "@/hooks/useEmployeeStore";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "./styles.scss";
 
@@ -20,7 +20,7 @@ export const EmployeeList = () => {
     const [rowsPerPage, setRowsPerPage] = useState<number>(5);
     const navigate = useNavigate();
 
-    const filteredEmployeeList = employees?.filter((employee) =>
+    const filteredEmployeeList = employees.data?.filter((employee) =>
         `${employee.lastName} ${employee.firstName} ${employee.middleName}`
             .toLocaleLowerCase()
             .includes(search.toLocaleLowerCase())
@@ -52,7 +52,7 @@ export const EmployeeList = () => {
     }, [fetchEmployees, page, rowsPerPage]);
 
     if (isLoading) {
-        return <h1>Loading...</h1>;
+        return <div>Loading...</div>;
     }
 
     return (

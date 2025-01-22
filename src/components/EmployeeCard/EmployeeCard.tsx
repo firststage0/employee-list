@@ -1,7 +1,7 @@
 import { useEmployeeStore } from "@/hooks/useEmployeeStore";
 import { Card, CardContent, Typography } from "@mui/material";
-import imageNotAvailable from "/image-not-available.jpg";
 import { Link } from "react-router";
+import imageNotAvailable from "/image-not-available.jpg";
 
 import "./styles.scss";
 
@@ -11,7 +11,7 @@ interface IEmployeeCardProps {
 
 export const EmployeeCard = ({ id }: IEmployeeCardProps) => {
     const employee = useEmployeeStore((state) =>
-        state.employees.find((el) => el.id === id)
+        state.employees.data.find((el) => el.id === id)
     );
 
     if (!employee) {
